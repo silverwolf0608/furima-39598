@@ -23,7 +23,7 @@ Things you may want to cover:
 
 * ...
 
-## users テーブル
+## usersテーブル
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
@@ -37,12 +37,12 @@ Things you may want to cover:
 | encrypted_password  | string     | null: false                    |
 
 ### Association
-- has_many :purchase record
+- has_many :purchase_records
 - has_many :items
 
 
 
-## items テーブル
+## itemsテーブル
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
@@ -50,15 +50,15 @@ Things you may want to cover:
 | description         | text       | null: false                    |
 | category_id         | integer    | null: false                    |
 | condition_id        | integer    | null; false                    |
-| shipping charges_id | integer    | null: false                    |
+| shipping_charge_id | integer    | null: false                    |
 | prefecture_id       | integer    | null: false                    |
-| shipping date_id    | integer    | null: false                    |
+| shipping_date_id    | integer    | null: false                    |
 | price               | integer    | null: false                    |
 | user                | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- has_one :purchase record
+- has_one :purchase_record
 
 
 
@@ -68,17 +68,18 @@ Things you may want to cover:
 | ------------------- | ---------- | ------------------------------ |
 | post_code           | string     | null :false                    |
 | prefecture_id       | integer    | null :false                    |
-| municipalities      | string     | null :false                    |
+| municipality        | string     | null :false                    |
 | street_address      | string     | null :false                    |
 | building_name       | string     |                                |
-| telephone_number    | string     | null :false, foreign_key: true |
+| telephone_number    | string     | null :false                    |
+| purchase_record     | references | null :false, foreign_key: true |
 
 ### Association
-- belongs_to :purchase record
+- belongs_to :purchase_record
 
 
 
-## purchase recordテーブル
+## purchase_recordsテーブル
 
 | Column              | Type       | Options                        |
 | ------------------- | ---------- | ------------------------------ |
