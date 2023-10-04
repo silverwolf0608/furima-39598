@@ -13,7 +13,7 @@ class Item < ApplicationRecord
   validates :prefecture_id, presence: true
   validates :shipping_date_id, presence: true
   validates :price, presence: true
-  validates :user, presence: true
+  validates :image, presence: true
 
   belongs_to :category
   belongs_to :condition
