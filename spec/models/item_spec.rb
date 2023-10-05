@@ -92,8 +92,8 @@ RSpec.describe Item, type: :model do
       end
 
       it 'ユーザーが紐づいていないと出品できない' do
-        item = FactoryBot.build(:item, user: nil)
-        expect(item).to_not be_valid
+        @item.user = nil
+        expect(@item).to_not be_valid
       end
     end
   end
