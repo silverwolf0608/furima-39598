@@ -12,10 +12,11 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
+    puts "Item params: #{item_params.inspect}"
     if @item.save
       redirect_to root_path
     else
-      render :new, status: :unprocessable
+      render :new, status: :unprocessable_entity
     end
   end
 
