@@ -94,6 +94,7 @@ RSpec.describe Item, type: :model do
       it 'ユーザーが紐づいていないと出品できない' do
         @item.user = nil
         expect(@item).to_not be_valid
+        expect(@item.errors[:user]).to include("must exist")
       end
     end
   end
