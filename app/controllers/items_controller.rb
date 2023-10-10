@@ -21,22 +21,17 @@ class ItemsController < ApplicationController
   end
 
   def show
-   
   end
 
   def edit
     if user_signed_in?
-    unless user_signed_in? && current_user == @item.user
-      redirect_to action: :index
-    end
+      redirect_to action: :index unless user_signed_in? && current_user == @item.user
     else
       redirect_to new_user_session_path
     end
   end
 
   def update
-    
-
     if @item.update(item_params)
       redirect_to item_path
     else
