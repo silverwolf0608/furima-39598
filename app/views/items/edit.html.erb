@@ -12,9 +12,7 @@ app/assets/stylesheets/items/new.css %>
     <div id="error_explanation">
       <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
       <ul>
-        <% @item.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
+      <%= render 'shared/error_messages', model: f.object %> 
       </ul>
     </div>
     <% end %>
