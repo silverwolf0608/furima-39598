@@ -1,5 +1,5 @@
 const pay = () => {
-  const payjp = Payjp('pk_test_ffb010a6200caf93a1b012b9')
+  const payjp = Payjp('pk_test_ffb010a6200caf93a1b012b9');
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -10,7 +10,7 @@ const pay = () => {
   cvcElement.mount('#cvc-form');
   const form = document.getElementById('charge-form');
   form.addEventListener("submit", (e) => {
-    payjp.createToken(numberElement).than(function (response){
+    payjp.createToken(numberElement).then(function (response){
       if (response.error){
       } else {
         const token = response.id;
