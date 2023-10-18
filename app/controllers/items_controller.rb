@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
     if current_user != @item.user || (@purchase_records.present? && @purchase_records.pluck(:item_id).include?(@item.id))
       redirect_to action: :index
     else
-      redirect_to edit
+      render :edit
     end
   end
 
