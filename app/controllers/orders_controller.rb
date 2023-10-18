@@ -1,4 +1,6 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_record_address = PurchaseRecordAddress.new
