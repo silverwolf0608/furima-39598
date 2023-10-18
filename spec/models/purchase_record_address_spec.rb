@@ -26,6 +26,12 @@ RSpec.describe PurchaseRecordAddress, type: :model do
         expect(@purchase_record_address.errors.full_messages).to include("Post code can't be blank")
       end
 
+      it '郵便番号が半角ハイフンを含む形でなければ購入できない' do
+        @purchase_record_address.post_code = '2343345'
+        @purchase_record_address.valid?
+        expect(@purchase_record_address.errors.full_messages).to include('Post code is invalid')
+      end
+
       it '郵便番号「3桁ハイフン4桁」でなければ購入できない' do
         @purchase_record_address.post_code = '2343-345'
         @purchase_record_address.valid?
@@ -71,19 +77,19 @@ RSpec.describe PurchaseRecordAddress, type: :model do
       it '電話番号が10桁-11桁でなければ購入できない(12桁)' do
         @purchase_record_address.telephone_number = '090123456789'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is too long (maximum is 11 characters)')
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is invalid')
       end
 
       it '電話番号が10桁-11桁でなければ購入できない(9桁)' do
         @purchase_record_address.telephone_number = '090123456'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is too short (minimum is 10 characters)')
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is invalid')
       end
 
       it '電話番号が半角でなければ購入できない' do
         @purchase_record_address.telephone_number = '０９０１２３４５６７８'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is not a number')
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is invalid')
       end
 
       it 'tokenが空では登録できない' do
