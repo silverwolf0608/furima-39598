@@ -16,6 +16,6 @@ function item_price() {
   }
 }
 
-window.addEventListener('turbo:load', () => {
+window.addEventListener('click', () => {
   item_price();
 });
