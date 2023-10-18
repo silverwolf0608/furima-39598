@@ -1,9 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :destroy]
+  before_action :authenticate_user!, only: [:new, :destroy, :edit]
   before_action :find_item, only: [:show, :edit, :update, :destroy]
 
   def index
     @items = Item.order('created_at DESC')
+    @purchase_records = PurchaseRecord.where(item_id: @items.pluck(:id))
   end
 
   def new
@@ -21,13 +22,15 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @purchase_records = PurchaseRecord.where(item_id: @item.id)
   end
 
   def edit
-    if user_signed_in?
-      redirect_to action: :index unless user_signed_in? && current_user == @item.user
+    @purchase_records = PurchaseRecord.where(item_id: @item.id)
+    if current_user != @item.user || (@purchase_records.present? && @purchase_records.pluck(:item_id).include?(@item.id))
+      redirect_to action: :index
     else
-      redirect_to new_user_session_path
+      render :edit
     end
   end
 

@@ -5,6 +5,8 @@ class Item < ApplicationRecord
 
   has_one_attached :image
 
+  has_one :purchase_record
+
   validates :item_name, presence: true
   validates :description, presence: true
   validates :category_id, presence: true
