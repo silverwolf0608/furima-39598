@@ -1,10 +1,16 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_record_address = PurchaseRecordAddress.new
     @item = Item.find(params[:item_id])
+    @purchase_records = PurchaseRecord.where(item_id: @item.id)
+    if current_user == @item.user
+      redirect_to root_path
+    elsif @purchase_records.present? && @purchase_records.pluck(:item_id).include?(@item.id)
+      redirect_to root_path
+    end
   end
 
   def create
