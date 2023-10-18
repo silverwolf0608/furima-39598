@@ -8,6 +8,9 @@ class PurchaseRecordAddress
   validates :municipality, presence: true
   validates :street_address, presence: true
   validates :telephone_number, presence: true, length: { in: 10..11 }, numericality: { only_integer: true}
+  validates :user_id, presence: true
+  validates :item_id, presence: true
+
 
   attr_accessor :token
   validates :token, presence: true
