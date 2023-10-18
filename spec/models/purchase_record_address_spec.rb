@@ -8,7 +8,6 @@ RSpec.describe PurchaseRecordAddress, type: :model do
   end
 
   describe '購入' do
-
     context '正常系' do
       it '必要な情報を適切に入力すると、商品の購入ができる' do
         expect(@purchase_record_address).to be_valid
@@ -30,13 +29,13 @@ RSpec.describe PurchaseRecordAddress, type: :model do
       it '郵便番号「3桁ハイフン4桁」でなければ購入できない' do
         @purchase_record_address.post_code = '2343-345'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_record_address.errors.full_messages).to include('Post code is invalid')
       end
 
       it '郵便番号が半角でなければ購入できない' do
         @purchase_record_address.post_code = '９８２ー００００'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Post code is invalid")
+        expect(@purchase_record_address.errors.full_messages).to include('Post code is invalid')
       end
 
       it '都道府県が空では購入できない' do
@@ -72,28 +71,28 @@ RSpec.describe PurchaseRecordAddress, type: :model do
       it '電話番号が10桁-11桁でなければ購入できない(12桁)' do
         @purchase_record_address.telephone_number = '090123456789'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Telephone number is too long (maximum is 11 characters)")
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is too long (maximum is 11 characters)')
       end
 
       it '電話番号が10桁-11桁でなければ購入できない(9桁)' do
         @purchase_record_address.telephone_number = '090123456'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Telephone number is too short (minimum is 10 characters)")
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is too short (minimum is 10 characters)')
       end
 
       it '電話番号が半角でなければ購入できない' do
         @purchase_record_address.telephone_number = '０９０１２３４５６７８'
         @purchase_record_address.valid?
-        expect(@purchase_record_address.errors.full_messages).to include("Telephone number is not a number")
+        expect(@purchase_record_address.errors.full_messages).to include('Telephone number is not a number')
       end
 
-      it "tokenが空では登録できない" do
+      it 'tokenが空では登録できない' do
         @purchase_record_address.token = nil
         @purchase_record_address.valid?
         expect(@purchase_record_address.errors.full_messages).to include("Token can't be blank")
       end
 
-      it "userが紐付いていなければ購入できない" do
+      it 'userが紐付いていなければ購入できない' do
         item = FactoryBot.create(:item)
         usernil = FactoryBot.build(:purchase_record_address, item_id: item.id)
         usernil.valid?
